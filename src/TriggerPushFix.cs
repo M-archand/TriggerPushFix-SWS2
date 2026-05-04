@@ -14,7 +14,7 @@ namespace TriggerPushFix;
 
 [PluginMetadata(
     Id = "TriggerPushFix",
-    Version = "1.0.0",
+    Version = "1.0.1",
     Name = "TriggerPushFix",
     Author = "Source2ZE devs (port by Marchand)",
     Description = "Revert trigger_push behaviour to be like CSGO")
@@ -23,10 +23,6 @@ public partial class TriggerPushFix : BasePlugin {
 
     // Spawnflag: trigger fires once and kills itself
     private const uint SF_TRIG_PUSH_ONCE = 0x80;
-
-    // Entity flags
-    private const uint FL_ONGROUND     = 1u;
-    private const uint FL_BASEVELOCITY = 1u << 23;
 
     // CCollisionProperty::m_usSolidFlags bit
     private const byte FSOLID_NOT_SOLID = 0x04;
@@ -296,12 +292,12 @@ public partial class TriggerPushFix : BasePlugin {
         var flags = other.Flags;
 
         // Accumulate with any existing base velocity set this tick
-        if ((flags & FL_BASEVELOCITY) != 0)
+        if ((flags & (uint)Flags_t.FL_BASEVELOCITY) != 0)
             vecPush += other.BaseVelocity;
 
         // If the push has an upward component, lift the entity off the ground so
         // that gravity does not immediately cancel it out
-        if (vecPush.Z > 0f && (flags & FL_ONGROUND) != 0 && _setGroundEntity != null) {
+        if (vecPush.Z > 0f && (flags & (uint)Flags_t.FL_ONGROUND) != 0 && _setGroundEntity != null) {
             _setGroundEntity.Call(pOther, nint.Zero, nint.Zero);
 
             var origin = other.AbsOrigin ?? Vector.Zero;
@@ -312,7 +308,7 @@ public partial class TriggerPushFix : BasePlugin {
         other.BaseVelocity = vecPush;
         other.BaseVelocityUpdated();
 
-        other.Flags = flags | FL_BASEVELOCITY;
+        other.Flags = flags | (uint)Flags_t.FL_BASEVELOCITY;
         other.FlagsUpdated();
     }
 
