@@ -1,0 +1,25 @@
+# "trigger_push_fix" is treated as a server ConVar.
+# It is set to 1 by default (enabled for all maps), unless intentionally set to 0 in your server config. 
+# The plugin listens for any trigger_push_fix ConVar changes and automatically reloads functionality.
+#
+# If trigger_push_fix is 1 (enabled globally), the maps listed below will have it disabled.
+# If trigger_push_fix is 0 (disabled globally), the maps listed below will have it enabled.
+# Maps that override the trigger_push_fix setting here:
+Maps = [
+    # "surf_testmap1",
+    # "surf_testmap2",
+]
+#
+# Cache the computed push vector per trigger (computed on first touch, reused for all subsequent touches).
+# Set to false only if your map has moving trigger_push entities (e.g. triggers on rotating platforms).
+CachePushVector = true
+#
+# If a required game signature fails to resolve (e.g. after a game update), completely suppress all
+# trigger_push entities instead of silently falling back to CS2 behaviour.
+# Recommended for competitive servers - set to false if you'd rather keep pushes working after updates.
+# Logic is present so that it will only apply to maps you have the fix enabled for. So if you have trigger_push_fix 0 set,
+# and the map "surf_testmap1" in your config, it will only disabled the trigger pushes for that map instead of all maps.
+KillOnFailure = true
+# Optionally send a Discord notification when a signature fails to resolve (e.g. after a game update).
+# Paste your Discord webhook URL between the quotes. Leave empty to disable.
+DiscordWebhook = ""

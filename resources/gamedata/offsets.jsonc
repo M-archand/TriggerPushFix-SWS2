@@ -1,0 +1,7 @@
+{
+    // Virtual function on CBaseTrigger - determines whether pOther passes the trigger's filter criteria
+    "PassesTriggerFilters": {
+        "windows": 273,
+        "linux":   274
+    }
+}
