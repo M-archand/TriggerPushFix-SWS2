@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://pan.samyyc.dev/s/VYmMXE" />
-  <h2><strong>TriggerPush Fix</strong></h2>
-  <h3>Revert trigger_push behaviour to be like CSGO</h3>
+  <h2><strong>TriggerPushFix</strong></h2>
+  <h3>Revert CS2 trigger_push behaviour to be like CSGO.</h3>
 </div>
 
 <p align="center">
@@ -27,7 +27,7 @@ Maps = [
     "surf_testmap2",
 ]
 
-### Cache the computed push vector once, or calculate every tick
+# Cache the computed push vector once, or calculate every tick
 CachePushVector = true
 
 # If a required game signature fails to resolve, kill all trigger_push
@@ -37,3 +37,7 @@ KillOnFailure = true
 # Optionally send a Discord notification when a signature fails to resolve
 DiscordWebhook = ""
 ```
+
+## Credits
+> [!IMPORTANT]
+> The original fixed trigger_push logic comes from [CS2Fixes](https://github.com/Source2ZE/CS2Fixes), credits to the Source2ZE devs for this. I just ported it and made some minor adjustments.
